@@ -1,0 +1,60 @@
+[
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 39,
+                "origin_hash": "bc9e1b8c8213dcb81baaa0ce0c0de60e"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "Return",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 28,
+                "origin_hash": "bc9e1b8c8213dcb81baaa0ce0c0de60e"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "BackSpace",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 29,
+                "origin_hash": "bc9e1b8c8213dcb81baaa0ce0c0de60e"
+            },
+            {
+                "type": 1,
+                "code": 39,
+                "origin_hash": "bc9e1b8c8213dcb81baaa0ce0c0de60e"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "semicolon",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 42,
+                "origin_hash": "bc9e1b8c8213dcb81baaa0ce0c0de60e"
+            },
+            {
+                "type": 1,
+                "code": 39,
+                "origin_hash": "bc9e1b8c8213dcb81baaa0ce0c0de60e"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "KEY_KPPLUS",
+        "mapping_type": "key_macro"
+    }
+]

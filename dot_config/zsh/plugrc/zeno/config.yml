@@ -1,0 +1,190 @@
+snippets:
+  - name: neovim
+    keyword: v
+    snippet: nvim
+  - name: neovide
+    keyword: nv
+    snippet: neovide
+  - name: source .zshrc
+    keyword: zc
+    snippet: source ~/.zshrc
+  - name: lazygit
+    keyword: lg
+    snippet: lazygit
+  - name: taskwarrior-tui
+    keyword: tt
+    snippet: taskwarrior-tui
+  - name: tmux
+    keyword: t
+    snippet: tmux
+  - name: tmux new session
+    keyword: ts
+    snippet: tmux new -s
+  - name: tmux attach a new session
+    keyword: ta
+    snippet: tmux attach
+  - name: tmux attach
+    keyword: tan
+    snippet: tmux attach -t
+  - name: tmux list
+    keyword: tl
+    snippet: tmux ls
+  - name: tmux kill session
+    keyword: tk
+    snippet: tmux kill-session -t
+  - name: kitty sesh
+    keyword: ks
+    snippet: kitty-sesh
+  - name: chezmoi
+    keyword: cz
+    snippet: chezmoi
+  - name: git add
+    keyword: ga
+    snippet: git add
+  - name: git add -p
+    keyword: gap
+    snippet: git add -p .
+  - name: git commit
+    keyword: gc
+    snippet: git commit -v
+  - name: git commit message
+    keyword: gcim
+    snippet: git commit -m '{{commit_message}}'
+  - name: git push
+    keyword: gp
+    snippet: git push
+  - name: git push origin HEAD
+    keyword: push
+    snippet: git push origin HEAD
+  - name: git pull
+    keyword: pull
+    snippet: git pull -p
+  - name: git diff
+    keyword: gd
+    snippet: git diff .
+  - name: git status
+    keyword: gs
+    snippet: git status --short --branch
+  - name: git branch
+    keyword: B
+    snippet: git symbolic-ref --short HEAD
+    context:
+      lbuffer: '^git\s+checkout\s+'
+    evaluate: true
+  - name: git tree view
+    keyword: gls
+    snippet: eza -Tla --git --git-ignore -I .git
+  - name: git aicommits
+    keyword: gac
+    snippet: git add -A && aicommits -a
+  - name: git home
+    keyword: proot
+    snippet: cd "$(git rev-parse --show-toplevel)"
+  - name: "null"
+    keyword: "null"
+    snippet: ">/dev/null 2>&1"
+    context:
+      lbuffer: '.+\s'
+  - name: expand ls to eza
+    keyword: ls
+    snippet: eza -a --group-directories-first --icons --git
+  - name: make gitignore by gibo
+    keyword: gia
+    snippet: create_gitignore
+  - name: long ls
+    keyword: ll
+    snippet: eza --all --header --long --icons --group-directories-first
+  - name: long la
+    keyword: la
+    snippet: eza -lbhHigUmuSa
+  - name: lt
+    keyword: lt
+    snippet: exa --tree --level=2 --icons --group-directories-first
+  - name: list path
+    keyword: path
+    snippet: echo $PATH | tr ':' '\n'
+  - name: abbr fastfetch
+    keyword: ff
+    snippet: fastfetch
+  - name: abbr sysfetch
+    keyword: sf
+    snippet: sysfetch
+  - name: yazi
+    keyword: fm
+    snippet: yazi
+  - name: udisksctl mount
+    keyword: um
+    snippet: udisksctl mount -b
+  - name: udisksctl unmount
+    keyword: uum
+    snippet: udisksctl unmount -b
+  - name: install package by yay
+    keyword: inst
+    snippet: yay -S
+  - name: remove package by yay
+    keyword: unst
+    snippet: yay -Rns
+  - name: remove package no longer needed
+    keyword: autoremove
+    snippet: sudo sh -c 'pacman -Qdtq | pacman -Rs -'
+  - name: expand :q to exit
+    keyword: :q
+    snippet: exit
+  - name: grim with slurp
+    keyword: grims
+    snippet: grim -g "$(slurp)" "$HOME/Pictures/grim-$(date +%Y%m%d-%H%M%S).png"
+  - name: grim with fzf
+    keyword: grimf
+    snippet: grim -g "$(fzf-geometry | { read i; sleep 3; echo $i })" "$HOME/Pictures/grim-$(date +%Y%m%d-%H%M%S).png"
+  - name: wf-recorder with slurp
+    keyword: wfrs
+    snippet: wf-recorder -g "$(slurp)" -f "$HOME/Videos/record-$(date +%Y%m%d-%H%M%S).mp4"
+  - name: wf-recorder with fzf
+    keyword: wfrf
+    snippet: wf-recorder -g "$(fzf-geometry | { read i; sleep 3; echo $i })" -f "$HOME/Videos/record-$(date +%Y%m%d-%H%M%S).mp4"
+  - name: auto commit message
+    keyword: ac
+    snippet: aicommits
+  - name: suspend
+    keyword: ss
+    snippet: systemctl suspend
+
+completions:
+  - name: kill
+    patterns:
+      - "^kill( -9)? $"
+    sourceCommand: "ps -ef | sed 1d"
+    options:
+      --multi: true
+      --prompt: "'Kill Process> '"
+    callback: "awk '{print $2}'"
+  - name: install package by pacman
+    patterns:
+      - "^sudo pacman -S $"
+    sourceCommand: "pacman -Sl"
+    options:
+      --multi: true
+      --prompt: "'Package to install> '"
+      --nth: "2"
+      --preview: "read _ i _ <<< {}; pacman -Sii \\$i"
+    callback: "awk '{print $2}'"
+  - name: install package by yay
+    patterns:
+      - "^yay -S $"
+    sourceCommand: "yay -Sl"
+    options:
+      --multi: true
+      --prompt: "'Package to install> '"
+      --nth: "2"
+      --preview: "read _ i _ <<< {}; yay -Sii \\$i"
+    callback: "awk '{print $2}'"
+  - name: remove package
+    patterns:
+      - "^yay -Rns $"
+    sourceCommand: "pacman -Qe"
+    options:
+      --multi: true
+      --prompt: "'Package to remove> '"
+      --nth: "1"
+      --preview: "read i _ <<< {}; yay -Sii \\$i"
+    callback: "awk '{print $1}'"

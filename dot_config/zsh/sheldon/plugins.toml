@@ -1,0 +1,91 @@
+shell = "zsh"
+
+[templates]
+defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer -t 0.0001 source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
+
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+hooks.post = '''
+zsh-defer source $HOME/.config/zsh/lazy.zsh
+zsh-defer -t 0.001 autoload -Uz compinit
+zsh-defer -t 0.001 compinit
+'''
+
+[plugins.powerlevel10k]
+github = 'romkatv/powerlevel10k'
+use = ['{{ name }}.zsh-theme']
+hooks.pre = '''
+ZLE_RPROMPT_INDENT=0
+source $HOME/.config/zsh/plugrc/p10k.zsh
+'''
+
+[plugins.zeno]
+github = 'yuki-yano/zeno.zsh'
+use = ['zeno.zsh']
+apply = ["defer"]
+hooks.pre = 'zsh-defer source $HOME/.config/zsh/plugrc/zeno_atinit.zsh'
+hooks.post = '''
+zsh-defer source $HOME/.config/zsh/plugrc/zeno_atload.zsh
+'''
+
+[plugins.fzf-tab]
+github = 'Aloxaf/fzf-tab'
+use = ['fzf-tab.zsh']
+apply = ["defer"]
+
+[plugins.syntax-highlight]
+github = 'z-shell/F-Sy-H'
+apply = ["defer"]
+
+[plugins.zsh-completions]
+github = 'zsh-users/zsh-completions'
+apply = ["defer"]
+
+[plugins.zsh-autosuggestions]
+github = 'zsh-users/zsh-autosuggestions'
+apply = ["defer"]
+
+# [plugins.zsh-autocomplete]
+# github = 'marlonrichert/zsh-autocomplete'
+# apply = ["defer"]
+
+[plugins.ni]
+github = 'azu/ni.zsh'
+use = ['ni.zsh']
+apply = ["defer"]
+
+# ohmyzsh
+[plugins.gitplug]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/git"
+apply = ["defer"]
+
+[plugins.gh]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/gh"
+apply = ["defer"]
+
+[plugins.aliasesplug]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/aliases"
+apply = ["defer"]
+
+[plugins.alias-finder]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/alias-finder"
+apply = ["defer"]
+
+[plugins.archlinux]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/archlinux"
+apply = ["defer"]
+
+[plugins.fancy-ctrl-z]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/fancy-ctrl-z"
+apply = ["defer"]
+
+[plugins.sudo]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/sudo"
+apply = ["defer"]

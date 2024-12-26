@@ -1,0 +1,8 @@
+# The language to use when printing the pokemon's name and/or description.
+# Possible options include en (English), fr (French), de (German), ja (Japanese),
+# zh_hans (Chinese with simplified characters), zh_hant (Chinese with traditional characters)
+language = 'ja'
+
+# The probability to show a shiny pokemon when using the random command
+shiny_rate = 0.0078125
+
